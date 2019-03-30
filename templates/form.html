@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>Form!</title>
+</head>
+<body onload="document.refresh();">
+<h1>Enter a date range and a customer name to get started!<br />
+Please use the format YYYY-MM-DD for all parts of this application!</h1>
+<form method="POST" action="{{ url_for("results") }}">
+    {{ form.csrf_token }}
+    {{ form.startdate.label }}
+    {{ form.startdate }}
+    {{ form.enddate.label }}
+    {{ form.enddate }}
+    {{ form.myInput.label }}
+    {{ form.myInput }}
+    {{ form.searchType.label }}
+    {{ form.searchType }}
+
+`   <a href="{{ url_for("results") }}">
+    <input type="submit" value="Submit">
+    </a>
+
+</form>
+</body>
+</html>
+
+<script>
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+var countries = ["Aarons","Ackerman","Alexander","Alfiero","Altman","Altman, Russell","Ambriano","Amoruso","Amoruso, Nick","Angacian","Assael","Atkinson","Auerbach","Axelrod","Axelrod, Ira","Baer","Balemian, Laura","Bandler","Baran","Barbour","Beal","Beberman","Bell","Bell, Nathalie","Bennett","Berger, Tricia","Beys, Emily","Bez","Bez, Peter","Bezmalinovic","Bhansali","Bharara","Bienenfeld","Bigger","Bill","Blank, Jamie","Blank, Sean","Borzooyeh","Boulukos","Bozek","Brotman","Buscaglia","Callahan","Capobianco","Carino","Carino, Sal","Carlson","Chang","Checo","Clark","Clegg","Cohen","Cohen, Nati","Cohen, Phyllis","Cook","Curry","Curtis","Davidson","De Felice","Decapite","Del Balso","Delasandro","Delia","Dell","Dempsey","Denner","Deriso, Jamie","Ding","Dr.  Kalmar","Dreher","Duff","Ebert","Ehrlich","Fagin","Feibl","Feit","Felix","Fensterman","Ferrara","Fields","Flanagan","Fletcher","Flowers, Larry","Flynn","Fox ","Fox, Greta","Friedman","Gaing","Gang","Genovesi, Erum","Gershowitz","Ghamar","Giacobbe","Godlis","Goldberg","Golden Little Elephant 16","Golden Little Elephant 35","Golden Little Elephant 39","Goldsmith, Tom","Gordon, Maris","Gottfried","Goyal","Grant","Hafkin","Halal","Handler","Hanover","Haupt","Hazan","Heller","Hentze","Herenstein","Hirsch","Hochwald","Honig","Hoover","Horan","Horsch","Jackson","Jensen","Kalmar","Kamin, Lewis","Kammer","Kaplan","Kaplan, Penny","Kaplan, Steven","Katz","Kazanchi","Kelly, Michael and Mary Beth","Kerker","Kern","Kilcullen, Peter","Klein","Klipper","Korvar","Kramer","Kraulstein","Laderer","Lazar","Lebowitz","Leeds, Liz","Lerner","Levine","Levitt","Lindstrom, Tina","Litman","Locker","Loeb","Lucas","Macarone","Macchiarella","Mahlotra","Maltin","Manino","Marsalise","Martin, Tim","McDonagh","McTygue","Meirowitz","Mevorah, Mindy","Michaels","Michelman","Mohtadi","Monaco","Mortarotti","Mosleh","Mosleh, Bita","Moslow","Nahas","Nesi","Nierenberg","Nissan","Nordstrom","O'Connor","Oliver","Ospina","Parga","Park","Pasqualone","Passarelli","Pelen Enterprises, Inc.","Perlmutter","Pollaci, Joseph","Portanese","Rao","Rapp","Reynolds","Rieders","Riley","Rispler","Robinson","Roeske","Romanoff","Rosenberg","Ross","Rueb","Sabatino","Samide","Sangha, Rummy","Schaefer","Schlanger","Schneider","Schneider, Michelle","Sciarrino","Serel","Sessa","Shaber","Shaber, Debbie","Sharf","Sher, Gary","Sherman, Wendy","Sica","Siegel","Siegel, Andrea","Siegel, Howard","Simon","Sirignano","Siskind","Skolnick","Smith","Solomon","Steigman","Stein","Stone","Su","Suneja","Sunshine Pools","Talamas, Michael","Tallarico","Taxel","Thomas","Tiberio","Torres","Tsitsoulas","Vahamonde","Vandenberg, Nicole","Wank","Wasserman","Wechsler","Weingard","Weiss, Kevin and Kelly","Werfel","Widmer","Wittels","Yan","Zachary","Zelentiz","Zhang, Donna"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+</script>

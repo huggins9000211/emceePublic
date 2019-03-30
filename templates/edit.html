@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .center {
+            display: table;
+            text-align: center;
+        }
+        .left {
+            display: table;
+            text-align: left;
+        }
+        .right {
+            display: table;
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+   <form method="POST" action="{{ url_for("results") }}">
+       {{ form2.csrf_token }}
+       <span class="left"> {{ form2.acid.label }}
+       {{ form2.acid }}</span>
+       <span class="center"> {{ form2.shock.label }}
+       {{ form2.shock }}</span>
+       <span class="right"> {{ form2.chlorine.label }}
+       {{ form2.chlorine }}</span>
+       <div class="left">{{ form2.salt.label }}
+       {{ form2.salt }}</div>
+       <div class="center">{{ form2.ph.label }}
+       {{ form2.ph }}</div>
+       <div class="right">{{ form2.yellowtrine.label }}
+       {{ form2.yellowtrine }}</div>
+       <div class="left">{{ form2.clarifier.label }}
+       {{ form2.clarifier }}</div>
+       <div class="center">{{ form2.sodium.label }}
+       {{ form2.sodium }}</div>
+       <div class="right">{{ form2.calcium.label }}
+       {{ form2.calcium }}</div>
+       <div class="center">{{ form2.conditioner.label }}
+       {{ form2.conditioner }}</div>
+
+       <a href="{{ url_for("results") }}">
+           <input type="submit" value="Submit">
+       </a>
+    </form>
+
+</body>
+</html>

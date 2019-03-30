@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/style.css" />
+    <style>
+        .center {
+        text-align: center;
+        border: 3px solid blue;
+        }
+        .big {
+            width: 650px;
+        }
+
+        table {
+            width: 5100px;
+            margin: auto;
+            table-layout: fixed;
+        }
+        table, th, td {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div style ="overflow-x:auto;">
+
+    <table>
+        <tr>
+            <th>Date:</th>
+            <th>Customer name:</th>
+            <th>Employee name:</th>
+            <th>Address:</th>
+            <th>Pool Type:</th>
+            <th>Visit Number:</th>
+            <th>Pool Clarity::</th>
+            <th>Chlorine LVL:</th>
+            <th>pH LVL:</th>
+            <th>Skimmer Baskets:</th>
+            <th>Skimmer Flaps:</th>
+            <th>Eyeballs c:</th>
+            <th>Eyeballs d:</th>
+            <th>Eyeballs e:</th>
+            <th>Fulcrum Pads:</th>
+            <th>Ladder Bumpers:</th>
+            <th>Acid:</th>
+            <th>Shock:</th>
+            <th>Chlorine:</th>
+            <th>Salt:</th>
+            <th>pH:</th>
+            <th>Yellowtrine:</th>
+            <th>Clarifier:</th>
+            <th>Sodium:</th>
+            <th>Calcium:</th>
+            <th>Conditioner:</th>
+        </tr>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ entry.get("date", "No data") }}</td>
+            <td>{{ entry.get("Customer name", "No data") }}</td>
+            <td>{{ entry.get("name", "No data") }}</td>
+            <td>{{ entry.get("adress", "No data") }}</td>
+            <td>{{ entry.get("pool type", "No data") }}</td>
+            <td>{{ entry.get("visit num", "No data") }}</td>
+            <td>{{ entry.get("Pool clarity", "No data") }}</td>
+            <td>{{ entry.get("Chlorine lvl", "No data") }}</td>
+            <td>{{ entry.get("pH lvl", "No data") }}</td>
+            <td>{{ entry.get("Skimmer baskets", "No data") }}</td>
+            <td>{{ entry.get("Skimmer flaps", "No data") }}</td>
+            <td>{{ entry.get("Eyeballs c", "No data") }}</td>
+            <td>{{ entry.get("Eyeballs d", "No data") }}</td>
+            <td>{{ entry.get("Eyeballs e", "No data") }}</td>
+            <td>{{ entry.get("Fulcrum pads", "No data") }}</td>
+            <td>{{ entry.get("Ladder bumpers", "No data") }}</td>
+            <td>{{ entry.get("acid", "No data") }}</td>
+            <td>{{ entry.get("shock", "No data") }}</td>
+            <td>{{ entry.get("chlorine", "No data") }}</td>
+            <td>{{ entry.get("salt", "No data") }}</td>
+            <td>{{ entry.get("ph", "No data") }}</td>
+            <td>{{ entry.get("yellowtrine", "No data") }}</td>
+            <td>{{ entry.get("clarifier", "No data") }}</td>
+            <td>{{ entry.get("sodium", "No data") }}</td>
+            <td>{{ entry.get("calcium", "No data") }}</td>
+            <td>{{ entry.get("conditioner", "No data") }}</td>
+
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+ <div class="notes">
+        {% for entry in notes %}
+            {% for date, note in entry.items() %}
+                <h3>{{ date }}:</h3> {{ note }}
+            {% endfor %}
+        {% endfor %}
+
+        <form method="POST" action="{{ url_for("invoice_summer") }}">
+            <button type="submit">Create invoice</button>
+        </form>
+ </div>
+
+
+</body>
+</html>
+

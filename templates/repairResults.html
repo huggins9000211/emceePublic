@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/style.css" />
+    <style>
+        .center {
+        text-align: center;
+        border: 3px solid blue;
+        }
+        .big {
+            width: 650px;
+        }
+
+        table {
+            width: 5100px;
+            margin: auto;
+            table-layout: fixed;
+        }
+        table, th, td {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div style ="overflow-x:auto;">
+
+    <table>
+        <tr>
+            <th>Date:</th>
+            <th>Customer name:</th>
+            <th>Employee name:</th>
+            <th>Address:</th>
+            <th class="big">Problem:</th>
+            <th class="big">Repairs:</th>
+            <th>Pvc Flex parts used:</th>
+            <th>Pvc parts used:</th>
+            <th>Clamps 1.5:</th>
+            <th>Clamps 2:</th>
+            <th>Couplings 1.5:</th>
+            <th>Couplings 2:</th>
+            <th>Elbows 1.5:</th>
+            <th>Elbows 2:</th>
+            <th>Female Adaptor 1.5:</th>
+            <th>Female Adaptor 2:</th>
+            <th>Male Adaptor 1.5:</th>
+            <th>Male Adaptor 2:</th>
+            <th>Nipples 1.5:</th>
+            <th>Nipples 2:</th>
+            <th>Unions 1.5:</th>
+            <th>Unions 2:</th>
+            <th>Valves 1.5:</th>
+            <th>Valves 2:</th>
+            <th>Ts 1.5:</th>
+            <th>Ts 2:</th>
+            <th>Street Els 1.5:</th>
+            <th>Street Els 2:</th>
+            <th>Poly Adapter 1.5:</th>
+            <th>Poly Adapter 2:</th>
+            <th>Unions 1.5:</th>
+            <th>Unions 2:</th>
+        </tr>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ entry.get("date", "No data") }}</td>
+            <td>{{ entry.get("custName", "No data") }}</td>
+            <td>{{ entry.get("name", "No data") }}</td>
+            <td>{{ entry.get("adress", "No data") }}</td>
+            <td class="big">{{ entry.get("Problem", "No data") }}</td>
+            <td class="big">{{ entry.get("Repairs", "No data") }}</td>
+            <td>{{ entry.get("PVC Flex parts", "No data") }}</td>
+            <td>{{ entry.get("Pvc parts", "No data") }}</td>
+            <td>{{ entry.get("Clamps 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Clamps 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Couplings 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Couplings 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Elbows 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Elbows 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Female Adaptor 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Female Adaptor 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Male Adaptor 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Male Adaptor 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Nipples 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Nipples 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Unions 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Unions 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Valves 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Valves 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Ts 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Ts 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Street Els 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Street Els 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Poly Adaptor 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Poly Adaptor 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Unions 1.5 in", "No data") }}</td>
+            <td>{{ entry.get("Unions 1.5 in", "No data") }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+ <div class="notes">
+        {% for entry in notes %}
+            {% for date, note in entry.items() %}
+                <h3>{{ date }}:</h3> {{ note }}
+            {% endfor %}
+        {% endfor %}
+ </div>
+
+
+</body>
+</html>
+
